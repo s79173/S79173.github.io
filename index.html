@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nur Hazirah - Student Landing Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Reset and Global Styles */
+        :root {
+            --color-white: #ffffff;
+            --color-light-grey: #f4f7f9; /* Soft background */
+            --color-medium-grey: #e9ecef; /* Card border/separator */
+            --color-dark-grey: #343a40; /* Text color */
+            --color-accent: #004d99; /* Deep Ocean Blue (UMT Theme Accent) */
+            --color-text-light: #868e96; /* Secondary text */
+            --border-radius: 12px;
+            --padding: 24px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--color-light-grey);
+            color: var(--color-dark-grey);
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        /* Bento Grid Container */
+        .bento-grid-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            gap: 20px;
+            
+            /* Desktop Layout: 3 columns */
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: auto;
+            
+            /* Define specific areas for grid items for easy placement */
+            grid-template-areas:
+                "profile    profile    location"
+                "profile    profile    tech-stack"
+                "case-study hobby      tech-stack"
+                "playlist   playlist   playlist";
+        }
+
+        /* Card Styling */
+        .bento-card {
+            background-color: var(--color-white);
+            border: 1px solid var(--color-medium-grey);
+            border-radius: var(--border-radius);
+            padding: var(--padding);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .bento-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Specific Card Placement and Sizing */
+        .card-profile {
+            grid-area: profile;
+            min-height: 350px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-location { grid-area: location; }
+        .card-tech-stack { grid-area: tech-stack; }
+        .card-case-study { grid-area: case-study; }
+        .card-hobby { grid-area: hobby; }
+        .card-playlist { grid-area: playlist; }
+
+        /* Content Styling */
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: var(--color-dark-grey);
+        }
+        
+        .tagline {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--color-accent);
+            margin-top: 20px;
+            border-left: 4px solid var(--color-accent);
+            padding-left: 15px;
+        }
+
+        p {
+            margin-bottom: 10px;
+            color: var(--color-dark-grey);
+        }
+
+        .card-profile .main-info {
+            font-size: 1.1rem;
+        }
+
+        .card-profile .social-links a {
+            display: inline-block;
+            margin-right: 15px;
+            color: var(--color-accent);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .card-profile .social-links a:hover {
+            color: #003366;
+        }
+
+        .card-location .time {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--color-accent);
+            margin-top: 10px;
+        }
+
+        .card-tech-stack ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .card-tech-stack li {
+            background-color: var(--color-light-grey);
+            border-left: 3px solid var(--color-accent);
+            padding: 8px 12px;
+            margin-bottom: 8px;
+            border-radius: 4px;
+            font-size: 0.95rem;
+        }
+
+        .card-case-study .title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--color-accent);
+            margin-top: 10px;
+        }
+
+        .card-hobby p {
+            color: var(--color-dark-grey);
+            margin-bottom: 0;
+        }
+        
+        .card-playlist p {
+            font-style: italic;
+            color: var(--color-text-light);
+        }
+
+        /* Mobile Responsiveness (Vertical Stack) */
+        @media (max-width: 768px) {
+            .bento-grid-container {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+                
+                /* Reset grid-area for mobile stack order */
+                grid-template-areas: 
+                    "profile"
+                    "location"
+                    "tech-stack"
+                    "case-study"
+                    "hobby"
+                    "playlist";
+            }
+            
+            .bento-card {
+                min-height: auto;
+            }
+
+            body {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bento-grid-container">
+
+        <div class="bento-card card-profile">
+            <div>
+                <h2>👤 Nur Hazirah</h2>
+                <div class="main-info">
+                    <h3>Food Science (Food Technology) Student</h3>
+                    <p><strong>Year:</strong> Year 1</p>
+                </div>
+            </div>
+
+            <div>
+                <div class="tagline">
+                    Innovating food safety.
+                </div>
+                <hr style="margin: 20px 0; border: 0; border-top: 1px solid var(--color-medium-grey);">
+                <div class="social-links">
+                    <p style="margin-bottom: 8px;">Connect:</p>
+                    <a href="#">LinkedIn</a>
+                    <a href="#">GitHub</a>
+                    <a href="#">UMT Portal</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="bento-card card-location">
+            <h2>📍 Campus Location</h2>
+            <p><strong>Campus:</strong> UMT, Kuala Nerus</p>
+            <div class="time" id="current-time">2:33 PM</div>
+            <p style="color: var(--color-text-light); font-size: 0.9rem;">Current Local Time</p>
+        </div>
+
+        <div class="bento-card card-tech-stack">
+            <h2>🧪 Core Subjects</h2>
+            <ul>
+                <li>Biochemistry (Biochem)</li>
+                <li>Physical Chemistry</li>
+                <li>Engineering Mathematics</li>
+                <li>Organic Chemistry</li>
+            </ul>
+        </div>
+
+        <div class="bento-card card-case-study">
+            <h2>🍚 Research Snippet</h2>
+            <p><strong>Project:</strong> Starch Gelatinization in Local Kuih</p>
+            <div class="title">Analyzing Texture Profiles of Kuih Lapis</div>
+            <p style="color: var(--color-text-light); font-size: 0.95rem;">
+                Focused on investigating how temperature, water content, and ingredient ratios affect the gelatinization of starch, directly influencing the final texture and stability of multi-layered *Kuih Lapis*. 
+            </p>
+        </div>
+
+        <div class="bento-card card-hobby">
+            <h2>🎬 Leisure Time</h2>
+            <p><strong>Hobby:</strong> Watching Movies</p>
+            <p style="color: var(--color-text-light);">
+                Favorite genres include Sci-Fi and Documentaries to unwind after a productive week.
+            </p>
+        </div>
+
+        <div class="bento-card card-playlist">
+            <h2>🎧 Study Playlist</h2>
+            <p>Lo-fi beats and ambient soundscapes for maximum concentration while tackling assignments and final reports.</p>
+            <div style="height: 60px; background-color: var(--color-medium-grey); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                <p style="margin: 0; color: var(--color-dark-grey);">[Embedded Music Player Placeholder]</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function updateTime() {
+            const timeElement = document.getElementById('current-time');
+            if (timeElement) {
+                const now = new Date();
+                // Format time as H:MM AM/PM
+                const timeString = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+                timeElement.textContent = timeString;
+            }
+        }
+        // Initial call and set interval to update every second
+        updateTime();
+        setInterval(updateTime, 1000);
+    </script>
+
+</body>
+</html>
