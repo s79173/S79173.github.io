@@ -9,7 +9,7 @@
         /* CSS Reset and Global Styles */
         :root {
             /* --- REFINED GALAXY DARK THEME COLORS --- */
-            --color-white: #ffffff; /* Pure White (for titles/strong contrast) */
+            --color-white: #ffffff; 
             --color-light-grey: #0b0c10; /* Very Dark Blue/Space Blue - Background */
             --color-medium-grey: #1f2838; /* Dark Purple-Blue - Card Background */
             --color-dark-grey: #c5c6c7; /* Light Grey/Text Color */
@@ -54,85 +54,96 @@
         /* Card Styling */
         .bento-card {
             background-color: var(--color-medium-grey); 
-            border: 1px solid var(--color-accent-secondary); /* Dark purple border */
+            border: 1px solid var(--color-accent-secondary); 
             border-radius: var(--border-radius);
             padding: var(--padding);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5); /* Deeper shadow for dark mode */
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5); 
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative; /* Essential for containing pseudo-elements */
+            overflow: hidden; /* Ensures image/overlay respects borders */
         }
 
         /* Hover Effect Tweak */
         .bento-card:hover {
             transform: scale(1.01);
-            box-shadow: 0 10px 30px rgba(255, 192, 203, 0.15); /* Subtle pink glow on hover */
+            box-shadow: 0 10px 30px rgba(255, 192, 203, 0.15); 
         }
 
-        /* Specific Card Placement and Sizing */
-        .card-profile {
-            grid-area: profile;
-            min-height: 350px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-
-            /* Profile Image Background Styles */
-            background-image: url('bg.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            position: relative;
-            z-index: 1;
-            overflow: hidden;
-        }
-
-        /* Add overlay for readability */
-        .card-profile::before {
+        /* Generic overlay for cards with backgrounds */
+        .card-profile::before,
+        .card-location::before,
+        .card-hobby::before {
             content: "";
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.55); /* Darker overlay for contrast */
+            background-color: rgba(0, 0, 0, 0.55); /* Dark overlay */
             border-radius: var(--border-radius);
-            z-index: 2;
+            z-index: 1;
+        }
+        
+        /* Ensure all content within image-based cards is above the overlay */
+        .card-profile > *,
+        .card-location > *,
+        .card-hobby > * {
+            position: relative;
+            z-index: 2; 
         }
 
-        /* Profile Text Styling over image */
-        .card-profile h2, 
-        .card-profile h3, 
-        .card-profile p, 
-        .card-profile .tagline,
-        .card-profile hr {
-            color: var(--color-white) !important; 
-            position: relative;
-            z-index: 3;
-            text-shadow: 0 0 5px rgba(255, 192, 203, 0.2); /* Soft light pink glow */
+        /* --- BACKGROUND IMAGE STYLES --- */
+        
+        /* Card 2 (Location) - senja.jpg */
+        .card-location {
+            grid-area: location;
+            background-image: url('senja.jpg'); 
+            background-size: cover;
+            background-position: center;
         }
         
-        .card-profile .social-links a {
-            color: var(--color-accent-primary) !important; /* Light pink links over image */
-            position: relative;
-            z-index: 3;
+        /* Card 5 (Hobby) - dark.jpg */
+        .card-hobby {
+            grid-area: hobby;
+            background-image: url('dark.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Profile Card - bg.jpg (Existing) */
+        .card-profile {
+            grid-area: profile;
+            min-height: 350px;
+            display: flex; 
+            flex-direction: column;
+            justify-content: space-between;
+            background-image: url('bg.jpg');
+            background-size: cover;
+            background-position: center;
         }
         
-        .card-profile .social-links a:hover {
+        /* --- TEXT COLOR OVERRIDES FOR IMAGE CARDS --- */
+        /* Force white text for readability on image backgrounds */
+        .card-profile h2, .card-profile h3, .card-profile p, .card-profile .tagline, .card-profile hr,
+        .card-location h2, .card-location p, .card-location .time,
+        .card-hobby h2, .card-hobby p {
             color: var(--color-white) !important;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6); /* Add contrast shadow */
         }
         
-        .card-location { grid-area: location; }
-        .card-tech-stack { grid-area: tech-stack; }
-        .card-case-study { grid-area: case-study; }
-        .card-hobby { grid-area: hobby; }
-        .card-reflection { grid-area: reflection; } 
-        .card-playlist { grid-area: playlist; }
+        /* Keep accent colors on top of the white override */
+        .card-location .time {
+            color: var(--color-accent-primary) !important; 
+        }
+        /* ------------------------------------------- */
 
-        /* Content Styling */
+
+        /* Content Styling (Non-Image Cards) */
         h2 {
             font-size: 1.5rem;
             margin-bottom: 10px;
             font-weight: 700;
-            color: var(--color-white); /* All main titles are bright white */
+            color: var(--color-white); 
         }
 
         h3 {
@@ -145,28 +156,20 @@
         .tagline {
             font-size: 1.3rem;
             font-weight: 700;
-            color: var(--color-accent-primary); /* Tagline is light pink accent */
+            color: var(--color-accent-primary); 
             margin-top: 20px;
-            border-left: 4px solid var(--color-accent-secondary); /* Dark purple line */
+            border-left: 4px solid var(--color-accent-secondary); 
             padding-left: 15px;
         }
 
         p {
             margin-bottom: 10px;
-            color: var(--color-text-dim); /* Body text is slightly dimmer */
+            color: var(--color-text-dim); 
         }
-
-        /* Specific accent colors for items */
-        .card-location .time {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--color-accent-primary); /* Time is light pink accent */
-            margin-top: 10px;
-        }
-
+        
         .card-tech-stack li {
-            background-color: #2e3b50; /* Slightly lighter inner background */
-            border-left: 3px solid var(--color-accent-secondary); /* Dark purple border */
+            background-color: #2e3b50; 
+            border-left: 3px solid var(--color-accent-secondary); 
             padding: 8px 12px;
             margin-bottom: 8px;
             border-radius: 4px;
@@ -177,23 +180,12 @@
         .card-case-study .title, .card-reflection .title {
             font-size: 1.2rem;
             font-weight: 600;
-            color: var(--color-accent-primary); /* Case study title is light pink */
+            color: var(--color-accent-primary); 
             margin-top: 10px;
         }
 
-        .card-reflection p {
-            font-style: italic;
-            color: var(--color-text-dim);
-            margin-top: 15px;
-        }
-
-        .card-playlist p {
-            font-style: italic;
-            color: var(--color-text-dim);
-        }
-
         .card-playlist .placeholder-box {
-            background-color: #2e3b50; /* Matches the li background */
+            background-color: #2e3b50; 
         }
 
 
@@ -252,8 +244,8 @@
         <div class="bento-card card-location">
             <h2>📍 Campus Location</h2>
             <p><strong>Campus:</strong> UMT, Kuala Nerus</p>
-            <div class="time" id="current-time">4:02 PM</div>
-            <p style="color: var(--color-text-dim); font-size: 0.9rem;">Current Local Time</p>
+            <div class="time" id="current-time">4:20 PM</div>
+            <p style="font-size: 0.9rem;">Current Local Time</p>
         </div>
 
         <div class="bento-card card-tech-stack">
@@ -278,7 +270,7 @@
         <div class="bento-card card-hobby">
             <h2>🎬 Leisure Time</h2>
             <p><strong>Hobby:</strong> Watching Movies</p>
-            <p style="color: var(--color-text-dim);">
+            <p>
                 Favorite genres include Sci-Fi and Documentaries to unwind after a productive week.
             </p>
         </div>
