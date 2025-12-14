@@ -3,17 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nur Hazirah - Student Landing Page</title>
+    <title>Nur Hazirah - Student Landing Page (Refined Galaxy Theme)</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         /* CSS Reset and Global Styles */
         :root {
-            --color-white: #ffffff;
-            --color-light-grey: #f4f7f9; /* Soft background */
-            --color-medium-grey: #e9ecef; /* Card border/separator */
-            --color-dark-grey: #343a40; /* Text color */
-            --color-accent: #004d99; /* Deep Ocean Blue (UMT Theme Accent) */
-            --color-text-light: #868e96; /* Secondary text */
+            /* --- REFINED GALAXY DARK THEME COLORS --- */
+            --color-white: #ffffff; /* Pure White (for titles/strong contrast) */
+            --color-light-grey: #0b0c10; /* Very Dark Blue/Space Blue - Background */
+            --color-medium-grey: #1f2838; /* Dark Purple-Blue - Card Background */
+            --color-dark-grey: #c5c6c7; /* Light Grey/Text Color */
+            --color-accent-primary: #ffc0cb; /* Light Pink (Primary Accent) */
+            --color-accent-secondary: #663399; /* Dark Purple/Violet (Secondary Accent) */
+            --color-text-dim: #99a2a9; /* Dimmer text for body/context */
+            /* -------------------------------------- */
             --border-radius: 12px;
             --padding: 24px;
         }
@@ -39,32 +42,29 @@
             margin: 0 auto;
             display: grid;
             gap: 20px;
-            
-            /* Desktop Layout: 3 columns */
             grid-template-columns: repeat(3, 1fr);
             grid-template-rows: auto;
-            
-            /* Define specific areas for grid items for easy placement */
             grid-template-areas:
                 "profile    profile    location"
                 "profile    profile    tech-stack"
-                "case-study hobby      tech-stack"
+                "case-study hobby      reflection"
                 "playlist   playlist   playlist";
         }
 
         /* Card Styling */
         .bento-card {
-            background-color: var(--color-white);
-            border: 1px solid var(--color-medium-grey);
+            background-color: var(--color-medium-grey); 
+            border: 1px solid var(--color-accent-secondary); /* Dark purple border */
             border-radius: var(--border-radius);
             padding: var(--padding);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5); /* Deeper shadow for dark mode */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
+        /* Hover Effect Tweak */
         .bento-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+            transform: scale(1.01);
+            box-shadow: 0 10px 30px rgba(255, 192, 203, 0.15); /* Subtle pink glow on hover */
         }
 
         /* Specific Card Placement and Sizing */
@@ -74,12 +74,57 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+
+            /* Profile Image Background Styles */
+            background-image: url('bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
         }
 
+        /* Add overlay for readability */
+        .card-profile::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.55); /* Darker overlay for contrast */
+            border-radius: var(--border-radius);
+            z-index: 2;
+        }
+
+        /* Profile Text Styling over image */
+        .card-profile h2, 
+        .card-profile h3, 
+        .card-profile p, 
+        .card-profile .tagline,
+        .card-profile hr {
+            color: var(--color-white) !important; 
+            position: relative;
+            z-index: 3;
+            text-shadow: 0 0 5px rgba(255, 192, 203, 0.2); /* Soft light pink glow */
+        }
+        
+        .card-profile .social-links a {
+            color: var(--color-accent-primary) !important; /* Light pink links over image */
+            position: relative;
+            z-index: 3;
+        }
+        
+        .card-profile .social-links a:hover {
+            color: var(--color-white) !important;
+        }
+        
         .card-location { grid-area: location; }
         .card-tech-stack { grid-area: tech-stack; }
         .card-case-study { grid-area: case-study; }
         .card-hobby { grid-area: hobby; }
+        .card-reflection { grid-area: reflection; } 
         .card-playlist { grid-area: playlist; }
 
         /* Content Styling */
@@ -87,6 +132,7 @@
             font-size: 1.5rem;
             margin-bottom: 10px;
             font-weight: 700;
+            color: var(--color-white); /* All main titles are bright white */
         }
 
         h3 {
@@ -99,85 +145,70 @@
         .tagline {
             font-size: 1.3rem;
             font-weight: 700;
-            color: var(--color-accent);
+            color: var(--color-accent-primary); /* Tagline is light pink accent */
             margin-top: 20px;
-            border-left: 4px solid var(--color-accent);
+            border-left: 4px solid var(--color-accent-secondary); /* Dark purple line */
             padding-left: 15px;
         }
 
         p {
             margin-bottom: 10px;
-            color: var(--color-dark-grey);
+            color: var(--color-text-dim); /* Body text is slightly dimmer */
         }
 
-        .card-profile .main-info {
-            font-size: 1.1rem;
-        }
-
-        .card-profile .social-links a {
-            display: inline-block;
-            margin-right: 15px;
-            color: var(--color-accent);
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.2s;
-        }
-
-        .card-profile .social-links a:hover {
-            color: #003366;
-        }
-
+        /* Specific accent colors for items */
         .card-location .time {
             font-size: 2rem;
             font-weight: 700;
-            color: var(--color-accent);
+            color: var(--color-accent-primary); /* Time is light pink accent */
             margin-top: 10px;
         }
 
-        .card-tech-stack ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
         .card-tech-stack li {
-            background-color: var(--color-light-grey);
-            border-left: 3px solid var(--color-accent);
+            background-color: #2e3b50; /* Slightly lighter inner background */
+            border-left: 3px solid var(--color-accent-secondary); /* Dark purple border */
             padding: 8px 12px;
             margin-bottom: 8px;
             border-radius: 4px;
             font-size: 0.95rem;
+            color: var(--color-dark-grey);
         }
 
-        .card-case-study .title {
+        .card-case-study .title, .card-reflection .title {
             font-size: 1.2rem;
             font-weight: 600;
-            color: var(--color-accent);
+            color: var(--color-accent-primary); /* Case study title is light pink */
             margin-top: 10px;
         }
 
-        .card-hobby p {
-            color: var(--color-dark-grey);
-            margin-bottom: 0;
+        .card-reflection p {
+            font-style: italic;
+            color: var(--color-text-dim);
+            margin-top: 15px;
         }
-        
+
         .card-playlist p {
             font-style: italic;
-            color: var(--color-text-light);
+            color: var(--color-text-dim);
         }
+
+        .card-playlist .placeholder-box {
+            background-color: #2e3b50; /* Matches the li background */
+        }
+
 
         /* Mobile Responsiveness (Vertical Stack) */
         @media (max-width: 768px) {
             .bento-grid-container {
                 grid-template-columns: 1fr;
                 grid-template-rows: auto;
-                
-                /* Reset grid-area for mobile stack order */
                 grid-template-areas: 
                     "profile"
                     "location"
                     "tech-stack"
                     "case-study"
                     "hobby"
+                    "reflection"
                     "playlist";
             }
             
@@ -208,12 +239,12 @@
                 <div class="tagline">
                     Innovating food safety.
                 </div>
-                <hr style="margin: 20px 0; border: 0; border-top: 1px solid var(--color-medium-grey);">
+                <hr style="margin: 20px 0; border: 0; border-top: 1px solid var(--color-white);">
                 <div class="social-links">
-                    <p style="margin-bottom: 8px;">Connect:</p>
-                    <a href="#">LinkedIn</a>
-                    <a href="#">GitHub</a>
-                    <a href="#">UMT Portal</a>
+                    <p style="margin-bottom: 8px; color: var(--color-white) !important;">Connect:</p>
+                    <a href="#" target="_blank">LinkedIn</a>
+                    <a href="" target="_blank">GitHub</a>
+                    <a href="https://s79173.github.io/" target="_blank">UMT Portal</a>
                 </div>
             </div>
         </div>
@@ -221,8 +252,8 @@
         <div class="bento-card card-location">
             <h2>📍 Campus Location</h2>
             <p><strong>Campus:</strong> UMT, Kuala Nerus</p>
-            <div class="time" id="current-time">2:33 PM</div>
-            <p style="color: var(--color-text-light); font-size: 0.9rem;">Current Local Time</p>
+            <div class="time" id="current-time">4:02 PM</div>
+            <p style="color: var(--color-text-dim); font-size: 0.9rem;">Current Local Time</p>
         </div>
 
         <div class="bento-card card-tech-stack">
@@ -239,23 +270,33 @@
             <h2>🍚 Research Snippet</h2>
             <p><strong>Project:</strong> Starch Gelatinization in Local Kuih</p>
             <div class="title">Analyzing Texture Profiles of Kuih Lapis</div>
-            <p style="color: var(--color-text-light); font-size: 0.95rem;">
-                Focused on investigating how temperature, water content, and ingredient ratios affect the gelatinization of starch, directly influencing the final texture and stability of multi-layered *Kuih Lapis*. 
+            <p style="color: var(--color-text-dim); font-size: 0.95rem;">
+                Focused on investigating how temperature, water content, and ingredient ratios affect the gelatinization of starch, directly influencing the final texture and stability of multi-layered *Kuih Lapis*.
             </p>
         </div>
 
         <div class="bento-card card-hobby">
             <h2>🎬 Leisure Time</h2>
             <p><strong>Hobby:</strong> Watching Movies</p>
-            <p style="color: var(--color-text-light);">
+            <p style="color: var(--color-text-dim);">
                 Favorite genres include Sci-Fi and Documentaries to unwind after a productive week.
+            </p>
+        </div>
+
+        <div class="bento-card card-reflection">
+            <h2>🌍 Why Food Tech Matters in Malaysia</h2>
+            <p style="color: var(--color-text-dim);">
+                Sustainable food security is crucial for our future. By optimizing local processing methods, we can reduce waste and improve nutrition.
+            </p>
+            <p style="font-size: 0.9rem; margin-top: 15px; color: var(--color-accent-primary); font-weight: 600;">
+                Focus: Waste Reduction & Nutritional Enhancement
             </p>
         </div>
 
         <div class="bento-card card-playlist">
             <h2>🎧 Study Playlist</h2>
-            <p>Lo-fi beats and ambient soundscapes for maximum concentration while tackling assignments and final reports.</p>
-            <div style="height: 60px; background-color: var(--color-medium-grey); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+             <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1E4Dq9hULB4Jhq?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>           
+             <div class="placeholder-box" style="height: 60px; background-color: #2e3b50; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
                 <p style="margin: 0; color: var(--color-dark-grey);">[Embedded Music Player Placeholder]</p>
             </div>
         </div>
