@@ -59,11 +59,10 @@
             padding: var(--padding);
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5); 
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative; /* Essential for containing pseudo-elements */
-            overflow: hidden; /* Ensures image/overlay respects borders */
+            position: relative; 
+            overflow: hidden; 
         }
 
-        /* Hover Effect Tweak */
         .bento-card:hover {
             transform: scale(1.01);
             box-shadow: 0 10px 30px rgba(255, 192, 203, 0.15); 
@@ -79,12 +78,11 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.55); /* Dark overlay */
+            background-color: rgba(0, 0, 0, 0.55); 
             border-radius: var(--border-radius);
             z-index: 1;
         }
         
-        /* Ensure all content within image-based cards is above the overlay */
         .card-profile > *,
         .card-location > *,
         .card-hobby > * {
@@ -93,8 +91,6 @@
         }
 
         /* --- BACKGROUND IMAGE STYLES --- */
-        
-        /* Card 2 (Location) - senja.jpg */
         .card-location {
             grid-area: location;
             background-image: url('senja.jpg'); 
@@ -102,7 +98,6 @@
             background-position: center;
         }
         
-        /* Card 5 (Hobby) - dark.jpg */
         .card-hobby {
             grid-area: hobby;
             background-image: url('dark.jpg');
@@ -110,7 +105,6 @@
             background-position: center;
         }
 
-        /* Profile Card - bg.jpg (Existing) */
         .card-profile {
             grid-area: profile;
             min-height: 350px;
@@ -123,22 +117,18 @@
         }
         
         /* --- TEXT COLOR OVERRIDES FOR IMAGE CARDS --- */
-        /* Force white text for readability on image backgrounds */
         .card-profile h2, .card-profile h3, .card-profile p, .card-profile .tagline, .card-profile hr,
         .card-location h2, .card-location p, .card-location .time,
         .card-hobby h2, .card-hobby p {
             color: var(--color-white) !important;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6); /* Add contrast shadow */
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6); 
         }
         
-        /* Keep accent colors on top of the white override */
         .card-location .time {
             color: var(--color-accent-primary) !important; 
         }
-        /* ------------------------------------------- */
 
-
-        /* Content Styling (Non-Image Cards) */
+        /* Content Styling */
         h2 {
             font-size: 1.5rem;
             margin-bottom: 10px;
@@ -184,16 +174,42 @@
             margin-top: 10px;
         }
 
+        /* --- LAB TIMER BUTTON STYLING --- */
+        .lab-btn-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .lab-button {
+            display: inline-block;
+            background-color: var(--color-accent-secondary);
+            color: var(--color-white);
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
+            box-shadow: 0 4px 10px rgba(102, 51, 153, 0.3);
+        }
+
+        .lab-button:hover {
+            background-color: var(--color-accent-primary);
+            color: var(--color-medium-grey);
+            border-color: var(--color-white);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(255, 192, 203, 0.4);
+        }
+
         .card-playlist .placeholder-box {
             background-color: #2e3b50; 
         }
 
-
-        /* Mobile Responsiveness (Vertical Stack) */
         @media (max-width: 768px) {
             .bento-grid-container {
                 grid-template-columns: 1fr;
-                grid-template-rows: auto;
                 grid-template-areas: 
                     "profile"
                     "location"
@@ -203,14 +219,7 @@
                     "reflection"
                     "playlist";
             }
-            
-            .bento-card {
-                min-height: auto;
-            }
-
-            body {
-                padding: 10px;
-            }
+            body { padding: 10px; }
         }
     </style>
 </head>
@@ -220,7 +229,7 @@
 
         <div class="bento-card card-profile">
             <div>
-                <h2>👤 Nur Hazirah</h2>
+                <h2>🧬 Nur Hazirah</h2>
                 <div class="main-info">
                     <h3>Food Science (Food Technology) Student</h3>
                     <p><strong>Year:</strong> Year 1</p>
@@ -234,9 +243,9 @@
                 <hr style="margin: 20px 0; border: 0; border-top: 1px solid var(--color-white);">
                 <div class="social-links">
                     <p style="margin-bottom: 8px; color: var(--color-white) !important;">Connect:</p>
-                    <a href="#" target="_blank">LinkedIn</a>
-                    <a href="" target="_blank">GitHub</a>
-                    <a href="https://s79173.github.io/" target="_blank">UMT Portal</a>
+                    <a href="#" target="_blank" style="color: var(--color-accent-primary); text-decoration: none; margin-right: 15px;">LinkedIn</a>
+                    <a href="#" target="_blank" style="color: var(--color-accent-primary); text-decoration: none; margin-right: 15px;">GitHub</a>
+                    <a href="https://s79173.github.io/" target="_blank" style="color: var(--color-accent-primary); text-decoration: none;">UMT Portal</a>
                 </div>
             </div>
         </div>
@@ -244,7 +253,7 @@
         <div class="bento-card card-location">
             <h2>📍 Campus Location</h2>
             <p><strong>Campus:</strong> UMT, Kuala Nerus</p>
-            <div class="time" id="current-time">4:20 PM</div>
+            <div class="time" id="current-time">--:-- --</div>
             <p style="font-size: 0.9rem;">Current Local Time</p>
         </div>
 
@@ -259,12 +268,15 @@
         </div>
 
         <div class="bento-card card-case-study">
-            <h2>🍚 Research Snippet</h2>
+            <h2>🔬 Research Snippet</h2>
             <p><strong>Project:</strong> Starch Gelatinization in Local Kuih</p>
             <div class="title">Analyzing Texture Profiles of Kuih Lapis</div>
             <p style="color: var(--color-text-dim); font-size: 0.95rem;">
-                Focused on investigating how temperature, water content, and ingredient ratios affect the gelatinization of starch, directly influencing the final texture and stability of multi-layered *Kuih Lapis*.
+                Investigating how temperature and ingredient ratios affect starch gelatinization and stability.
             </p>
+            <div class="lab-btn-container">
+                <a href="https://s79173.github.io/lab-timer-app/app.html" target="_blank" class="lab-button">Try My Lab Timer App</a>
+            </div>
         </div>
 
         <div class="bento-card card-hobby">
@@ -276,21 +288,18 @@
         </div>
 
         <div class="bento-card card-reflection">
-            <h2>🌍 Why Food Tech Matters in Malaysia</h2>
+            <h2>💡 Why Food Tech Matters</h2>
             <p style="color: var(--color-text-dim);">
-                Sustainable food security is crucial for our future. By optimizing local processing methods, we can reduce waste and improve nutrition.
+                Sustainable food security is crucial. By optimizing local processing, we can reduce waste and improve nutrition.
             </p>
             <p style="font-size: 0.9rem; margin-top: 15px; color: var(--color-accent-primary); font-weight: 600;">
-                Focus: Waste Reduction & Nutritional Enhancement
+                Focus: Waste Reduction
             </p>
         </div>
 
         <div class="bento-card card-playlist">
-            <h2>🎧 Study Playlist</h2>
-             <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1E4Dq9hULB4Jhq?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>           
-             <div class="placeholder-box" style="height: 60px; background-color: #2e3b50; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
-                <p style="margin: 0; color: var(--color-dark-grey);">[Embedded Music Player Placeholder]</p>
-            </div>
+            <h2>🎵 Study Playlist</h2>
+             <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1E4Dq9hULB4Jhq?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>           
         </div>
 
     </div>
@@ -300,12 +309,10 @@
             const timeElement = document.getElementById('current-time');
             if (timeElement) {
                 const now = new Date();
-                // Format time as H:MM AM/PM
                 const timeString = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
                 timeElement.textContent = timeString;
             }
         }
-        // Initial call and set interval to update every second
         updateTime();
         setInterval(updateTime, 1000);
     </script>
